@@ -1,0 +1,41 @@
+
+body {
+    background-color: #081938;
+}
+
+h1, h2 {
+    font-family: 'Times New Roman', Times, serif;
+    color: #ffffff;
+    margin:15px;
+}
+
+#submit {
+    margin:15px;
+}
+
+#form {
+    color: #ffffff;
+    margin:15px;
+}
+
+#preview{
+    width: 200px;
+    height: 100px;
+}
+
+#card {
+    font-weight: 400;
+    width: 80%;
+    height: 600px;
+}
+
+#error {
+    font-weight: 600;
+    color: #920000;
+}
+
+#close {
+    width: 20px;
+    height: 20px;
+    border: 5px;
+}
