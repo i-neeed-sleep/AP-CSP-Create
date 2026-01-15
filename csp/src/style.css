@@ -3,7 +3,7 @@ body {
     background-color: #081938;
 }
 
-h1, h2 {
+h1 {
     font-family: 'Times New Roman', Times, serif;
     color: #ffffff;
     margin:15px;
@@ -11,6 +11,10 @@ h1, h2 {
 
 #submit {
     margin:15px;
+    background-color: #002261;
+    font-family: 'Times New Roman', Times, serif;
+    color: #ffffff;
+    font-size: medium;
 }
 
 #form {
@@ -18,15 +22,18 @@ h1, h2 {
     margin:15px;
 }
 
-#preview{
-    width: 200px;
-    height: 100px;
+#list{
+    place-items: center;
 }
 
 #card {
-    font-weight: 400;
+    font-weight: 100;
     width: 80%;
-    height: 600px;
+    height: 200px;
+    background-color: #132952;
+    margin: 40px;
+    display: flex;
+    position: relative;
 }
 
 #error {
@@ -35,7 +42,17 @@ h1, h2 {
 }
 
 #close {
-    width: 20px;
-    height: 20px;
-    border: 5px;
+    background-color: #002261;
+    font-family: 'Times New Roman', Times, serif;
+    color: #ffffff;
+    font-size: medium;
+    max-height: 30px;
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+}
+
+#color{
+    width: 150px;
+    height: 100%;
 }
