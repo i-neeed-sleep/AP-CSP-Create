@@ -16,7 +16,7 @@ let set =[{
 function start(){
     set.forEach(color =>{
         list.insertAdjacentHTML('afterbegin',`
-            <div class = "card" id="${color.code}">
+            <div class = "card" id='${color.code}' color='${color.name}'>
                 <div id="color" style="background-color:${color.code};"></div>
                 <h1>${color.name} - ${color.code}</h1>
                 <button id = 'close'>Clean from Palette</button>
@@ -29,30 +29,30 @@ start();
 
 function add(rgb, name){
     list.insertAdjacentHTML('afterbegin',`
-        <div class = "card" id = '${rgb}'>
+        <div class = "card" id='${rgb}' color='${name}'>
             <div id="color" style="background-color:${rgb};"></div>
             <h1>${name} - ${rgb}</h1>
             <button id = 'close'>Clean from Palette</button>
         </div>
     `)
+    set.push({'name': name, 'code': rgb})
 }
 
 function error(error){
     message.innerHTML = `<h2 id="error">${error}</h2>`;
 }
 
-function search(target){
-    
-}
 
-document.querySelector('#search').addEventListener("submit", event =>{
-    event.preventDefault();
-    let search = document.querySelector('#search').value;
-    if (search.includes('#')){
-
-    }else{
-
-    }
+document.querySelector('#search').addEventListener("submit", ask =>{
+    ask.preventDefault();
+    let target = document.querySelector('#search').value;
+    document.querySelectorAll(".card").forEach(card => {
+        if(card.getAttribute("color").toLowerCase().includes(target.toLowerCase())||card.getAttribute("id").includes(target)){
+            card.style.display = "block";
+        }else{
+            card.style.display = "none";
+        }
+    })
 })
 
 document.querySelector('#submit').addEventListener("click", event =>{
@@ -61,38 +61,32 @@ document.querySelector('#submit').addEventListener("click", event =>{
     let name = document.querySelector('#inName').value;
     let exist = false;
 
+    if(color.includes('#') != true){
+        color = '#' + color;
+    }
+
     set.forEach(i =>{
-        if(i.name === color){
-            error("You already have this color in your palette");
+        if(i.code == color){
             exist = true;
         }
     })
 
     if (exist === false){
-        if (color.length > 7 || color.lenght < 6){
-            error("You're supposed use RGB hexdecimals");
+        if (color.length === 7){
+            add(color, name);
+            message.innerHTML = '';
         }
         else{
-            if (color.includes('#')){
-                add(color, name);
-                message.innerHTML = '';
-                set.push({'name': name, 'code': color})
-            }
-            if (color.includes('#') != true & color.length === 6){
-                let c = '#' + color;
-                add(c, name);
-                message.innerHTML = '';
-                set.push({'name': name, 'code': c})
-            }else{
-                error("You're supposed use RGB hexdecimals");
-            }
+            error("You're supposed use RGB hexdecimals");
         }
+    }else{
+        error('You already have this color in the palette');
     }
 }) 
 
-document.querySelectorAll('#close').forEach(i => addEventListener("click", close =>{
-    close.preventDefault();
-    const target = close.target.closest(".card").getAttribute('id');
+document.querySelectorAll('#close').forEach(button => button.addEventListener("click", event =>{
+    event.preventDefault();
+    const target = event.target.closest(".card").getAttribute('id');
     list.innerHTML = '';
     set = set.filter(i => i.code !== target);
     start();
