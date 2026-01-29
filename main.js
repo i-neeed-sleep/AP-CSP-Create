@@ -26,6 +26,17 @@ function start(){
 }
 start();
 
+function closed(){
+    document.querySelectorAll('#close').forEach(button => button.addEventListener("click", event =>{
+        event.preventDefault();
+        const target = event.target.closest(".card");
+        const tcolor = event.target.closest(".card").getAttribute('id');
+        set = set.filter(i => i.code !== tcolor);
+        target.remove();
+    }))
+}
+
+closed();
 
 function add(rgb, name){
     list.insertAdjacentHTML('afterbegin',`
@@ -35,7 +46,8 @@ function add(rgb, name){
             <button id = 'close'>Clean from Palette</button>
         </div>
     `)
-    set.push({'name': name, 'code': rgb})
+    set.push({'name': name, 'code': rgb});
+    closed();
 }
 
 function error(error){
@@ -85,11 +97,3 @@ document.querySelector('#submit').addEventListener("click", event =>{
         error('You already have this color in the palette');
     }
 }) 
-
-document.querySelectorAll('#close').forEach(button => button.addEventListener("click", event =>{
-    event.preventDefault();
-    const target = event.target.closest(".card").getAttribute('id');
-    list.innerHTML = '';
-    set = set.filter(i => i.code !== target);
-    start();
-}))
