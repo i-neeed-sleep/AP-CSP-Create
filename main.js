@@ -61,7 +61,7 @@ document.querySelector('.searched').addEventListener("submit", event =>{
     event.preventDefault();
     let target = document.querySelector('#search').value;
     document.querySelectorAll(".card").forEach(card => {
-        if(card.getAttribute("color").toLowerCase().includes(target.toLowerCase())||card.getAttribute("id").includes(target)){
+        if(card.getAttribute("color").toLowerCase().includes(target.toLowerCase())||card.getAttribute("id")===target){
             card.style.display = "flex";
         }else{
             card.style.display = "none";
