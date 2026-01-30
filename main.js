@@ -54,9 +54,6 @@ function error(error){
     message.innerHTML = `<h2 id="error">${error}</h2>`;
 }
 
-
-
-
 document.querySelector('.searched').addEventListener("submit", event =>{
     event.preventDefault();
     let target = document.querySelector('#search').value;
